@@ -1,8 +1,8 @@
 /*1. Using airline.payrollmaster table, create report that display the columns of total number of employees total number of male employees, total 
 number of female employee, percent of male employees by jobcode. Order the report according to the percent of male order.
 Add label and format to the percent of male employees column. (10pt)
-1. airline.payrollmaster Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© ´ÙÀ½ÀÇ ÄÃ·³À» Ãâ·ÂÇÑ´Ù. ÃÑ Á÷¿ø¼ö, ÃÑ ³²ÀÚÁ÷¿ø¼ö, ÃÑ ¿©ÀÚÁ÷¿ø¼ö, ³²ÀÚÁ÷¿øÀÇ ºñÀ²À» jobcode º°·Î °è»êÇÏ¿© Ãâ·ÂÇÑ´Ù. 4
-ÀÌ¶§ °è»êµÈ ³²ÀÚÁ÷¿øÀÇ ºñÀ²¿¡ µû¶ó ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÑ´Ù. ³²ÀÚÁ÷¿øÀÇ ºñÀ² ÄÃ·³¿¡ ÀûÀıÇÑ label°ú formatÀ» ÇÒ´çÇÑ´Ù. (10Á¡)*/
+1. airline.payrollmaster í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ë‹¤ìŒì˜ ì»¬ëŸ¼ì„ ì¶œë ¥í•œë‹¤. ì´ ì§ì›ìˆ˜, ì´ ë‚¨ìì§ì›ìˆ˜, ì´ ì—¬ìì§ì›ìˆ˜, ë‚¨ìì§ì›ì˜ ë¹„ìœ¨ì„ jobcode ë³„ë¡œ ê³„ì‚°í•˜ì—¬ ì¶œë ¥í•œë‹¤. 4
+ì´ë•Œ ê³„ì‚°ëœ ë‚¨ìì§ì›ì˜ ë¹„ìœ¨ì— ë”°ë¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•œë‹¤. ë‚¨ìì§ì›ì˜ ë¹„ìœ¨ ì»¬ëŸ¼ì— ì ì ˆí•œ labelê³¼ formatì„ í• ë‹¹í•œë‹¤. (10ì )*/
 
 proc sql;
 select jobcode, count(empid) as Total, sum(gender='M') as Male, sum(gender='F') as Female, 

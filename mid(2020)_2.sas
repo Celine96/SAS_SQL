@@ -1,6 +1,6 @@
-/*2¹ø ¹®Á¦: jobcode°¡ TAÀÎ Á÷¿øÁß °í°´¹øÈ£°¡ ¾ø´Â Á÷¿øÀÇ ÀÌ¸§°ú jobcategory¸¦ Ãâ·ÂÇØ¶ó
-- Á÷¿øÀÇ Á¤º¸: staffmaster(ÀÌ¸§), payrollmaster(jobcode) - ¿¬°áÀº empid
-- °í°´ÀÇ Á¤º¸: frequentflyer - ¿¬°áÀº phonenumber*/
+/*2ë²ˆ ë¬¸ì œ: jobcodeê°€ TAì¸ ì§ì›ì¤‘ ê³ ê°ë²ˆí˜¸ê°€ ì—†ëŠ” ì§ì›ì˜ ì´ë¦„ê³¼ jobcategoryë¥¼ ì¶œë ¥í•´ë¼
+- ì§ì›ì˜ ì •ë³´: staffmaster(ì´ë¦„), payrollmaster(jobcode) - ì—°ê²°ì€ empid
+- ê³ ê°ì˜ ì •ë³´: frequentflyer - ì—°ê²°ì€ phonenumber*/
 
 proc sql;
 select lastname, firstname, substr(jobcode,1,2) as JobCategory
@@ -11,4 +11,20 @@ select lastname, firstname, substr(jobcode,1,2) as JobCategory
 	(select phonenumber
 	from airline.frequentflyers);
 quit;
+
+/*ì •ë‹µ : not exist ì¿¼ë¦¬ ì‚¬ìš©
+frquentflyerì˜ ì •ë³´ëŠ” ê³ ê°ì˜ ì •ë³´ì´ì§€ë§Œ ì´ë¦„ì€ ì§ì›ì´ë¦„
+- nameì€ frquentflyer tableêº¼ê³ , ì´ê±¸ ì € inner tableì˜ lastname, firstnameì´ë‘ ë¹„êµí•œê±°êµ¬ë‚˜*/
+proc sql;
+select substr(jobcode, 1,2) as Jobcategory
+		, lastname
+		, firstname
+from airline.payrollmaster as p, airline.staffmaster as s
+where p.empid=s.empid
+and substr(jobcode,1,2) = 'TA'
+and not exists (select *
+		from airline.frequentflyers
+		where trim(lastname)||","||firstname=name); 
+quit;
+
 
